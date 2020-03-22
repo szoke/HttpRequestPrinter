@@ -1,0 +1,48 @@
+{
+	"info": {
+		"_postman_id": "6ff7e868-f0f7-4139-bcda-880fa05fdca7",
+		"name": "HttpRequestPrinter",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "POST Sample",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "coolFiles",
+							"type": "file",
+							"src": [
+								"/C:/BCS/TestData/CBCT/small.zip",
+								"/C:/BCS/TestData/CBCT/VReconstructionSpecification.xml"
+							]
+						},
+						{
+							"key": "coolFormField",
+							"value": "Everybody shake your body",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://localhost:44388/api/noparams",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44388",
+					"path": [
+						"api",
+						"noparams"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
