@@ -8,7 +8,7 @@ namespace HttpRequestPrinter.Controllers
 {
     [Route("api/")]
     [ApiController]
-    public class ValuesController : ControllerBase
+    public class RequestInfoEchoController : ControllerBase
     {
         [HttpPost]
         [Route("noparams")]
