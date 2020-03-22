@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "POST Sample",
+			"name": "noparams",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -38,6 +38,45 @@
 					"path": [
 						"api",
 						"noparams"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "form files",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "formFiles",
+							"type": "file",
+							"src": [
+								"/C:/BCS/TestData/CBCT/small.zip",
+								"/C:/BCS/TestData/CBCT/VReconstructionSpecification.xml"
+							]
+						},
+						{
+							"key": "coolFormField",
+							"value": "Everybody shake your body",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "https://localhost:44388/api/fromForm",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44388",
+					"path": [
+						"api",
+						"fromForm"
 					]
 				}
 			},

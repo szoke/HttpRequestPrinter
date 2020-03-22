@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HttpRequestPrinter.Controllers
@@ -10,6 +12,10 @@ namespace HttpRequestPrinter.Controllers
     [ApiController]
     public class RequestInfoEchoController : ControllerBase
     {
+        /*
+         * https://docs.microsoft.com/en-us/aspnet/core/mvc/models/file-uploads?view=aspnetcore-3.1
+         */
+
         [HttpPost]
         [Route("noparams")]
         public ActionResult<string> Post()
@@ -99,6 +105,23 @@ namespace HttpRequestPrinter.Controllers
             catch (Exception e)
             {
                 sb.AppendLine($"Accessing Request.Body.Length threw {e.GetType()}. Message: {e.Message}");
+            }
+
+            return sb.ToString();
+        }
+
+        [HttpPost]
+        [Route("fromform")]
+        public ActionResult<string> Post(List<IFormFile> formFiles) // !!!!!!!!!!!!4 Variable name must match key in Postman
+        {
+            var sb = new StringBuilder();
+
+            sb.AppendLine("--- FORM FILES ---");
+            sb.AppendLine($"Form file count: {formFiles.Count}");
+
+            foreach (var ff in formFiles)
+            {
+                sb.AppendLine($"{ff.Name} {ff.FileName} {ff.ContentType} {ff.ContentDisposition} {ff.Length}");
             }
 
             return sb.ToString();
