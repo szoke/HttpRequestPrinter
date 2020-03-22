@@ -1,0 +1,1 @@
+curl -F "binary_files[]=@cat.jfif,hedgehog.jpg" -X POST https://localhost:44388/api/noparams --output response.bin
