@@ -1,35 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2.HPack;
 
 namespace HttpRequestPrinter.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/")]
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        // GET api/values
-        [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/values
         [HttpPost]
+        [Route("noparams")]
         public ActionResult<string> Post()
         {
             Console.WriteLine("--- Request");
@@ -58,7 +40,7 @@ namespace HttpRequestPrinter.Controllers
                 sb.AppendLine($"Request.Form is present.");
                 sb.AppendLine($"Request.Form.Count: {form.Count}");
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 sb.AppendLine($"Accessing Request.Form threw {e.GetType()}. Message: {e.Message}");
             }
@@ -107,35 +89,19 @@ namespace HttpRequestPrinter.Controllers
             sb.AppendLine("--- BODY ---");
             try
             {
-                //var body = Request.Body;
                 using (var reader = new StreamReader(Request.Body))
                 {
                     var body = reader.ReadToEnd();
                     sb.AppendLine($"Body is {body.Length} bytes long.");
                     sb.AppendLine($"Body content: {body}");
-
-                    // Do something
                 }
-                //sb.AppendLine($"Body is {Request.Body.Length} bytes long.");
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 sb.AppendLine($"Accessing Request.Body.Length threw {e.GetType()}. Message: {e.Message}");
             }
 
             return sb.ToString();
-        }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }
